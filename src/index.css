@@ -1,0 +1,88 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-terminal: #0d1117;
+  --color-surface: #161b22;
+  --color-raised: #21262d;
+  --color-border: #30363d;
+  --color-fg: #e6edf3;
+  --color-muted: #8b949e;
+  --color-accent: #58a6ff;
+  --color-success: #3fb950;
+  --color-command: #a78bfa;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --animate-caret: caret 1.05s step-end infinite;
+}
+
+@keyframes caret {
+  from,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  to {
+    opacity: 0;
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid #58a6ff;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, #58a6ff 35%, transparent);
+    color: #e6edf3;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-caret {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #161b22;
+  color: #e6edf3;
+  border: 1px solid #58a6ff;
+  border-radius: 0.25rem;
+}
