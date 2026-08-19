@@ -3,9 +3,9 @@ export type Lang = 'pt' | 'en'
 export const content = {
   pt: {
     meta: {
-      title: 'João Rosa Conceição — Desenvolvedor Web',
+      title: 'João Rosa Conceição — Desenvolvedor Full Stack',
       description:
-        'Portfólio de João Rosa Conceição — Desenvolvedor Web. Sistemas web com PHP, Laravel e JavaScript.',
+        'Portfólio de João Rosa Conceição — Desenvolvedor Full Stack. Sistemas web com PHP, Laravel, Node e JavaScript.',
     },
     a11y: {
       skip: 'Pular para o conteúdo',
@@ -38,9 +38,9 @@ export const content = {
     hero: {
       command: 'whoami',
       name: 'João Rosa Conceição',
-      role: 'Desenvolvedor Web',
+      role: 'Desenvolvedor Full Stack',
       tagline:
-        'Construo soluções, exploro novas ideias e estou sempre em busca de evoluir como desenvolvedor. Para mim, cada projeto é uma oportunidade de transformar conhecimento em algo real, funcional e com a minha identidade.',
+        'Eu construo software para durar — simples de usar, sólido por baixo.',
       available: 'Disponível para novos desafios.',
     },
     about: {
@@ -48,8 +48,8 @@ export const content = {
       nameLabel: 'Nome',
       roleLabel: 'Cargo',
       name: 'João Rosa Conceição',
-      role: 'Desenvolvedor Web',
-      bio: 'Sou desenvolvedor web com foco em aplicações PHP/Laravel e interfaces objetivas. Gosto de transformar regras de negócio em sistemas organizados — autenticação, permissões, CRUDs e fluxos que resolvem o dia a dia.',
+      role: 'Desenvolvedor Full Stack',
+      bio: 'Sou desenvolvedor full stack com foco em aplicações PHP/Laravel e interfaces objetivas. Gosto de transformar regras de negócio em sistemas organizados — autenticação, permissões, CRUDs e fluxos que resolvem o dia a dia.',
       interests:
         'Trabalho principalmente com backends MVC, APIs REST e frontends pragmáticos. Tenho interesse em qualidade de código, experiência de desenvolvimento e em evoluir a experiência de quem usa o produto.',
       softCommand: 'skills --soft',
@@ -109,14 +109,22 @@ export const content = {
       placeholder: 'digite um comando e pressione Enter',
       legendLabel: 'comandos',
       enterHint: 'pressione Enter para executar',
-      navGroup: 'navegação',
-      sysGroup: 'sistema',
-      help: 'Digite um dos comandos acima',
+      navGroup: 'NAVEGAÇÃO',
+      sysGroup: 'SISTEMA',
+      help: 'Digite um dos comandos abaixo',
+      helpHint: 'digite help para explorar',
       notFound: 'comando não encontrado: {cmd} — digite help',
       langUsage: 'uso: lang pt | lang en',
       langSet: 'Idioma: Português',
+      themeUsage: 'uso: theme | theme github | theme midnight',
+      themeSet: 'Tema: {theme}',
+      themeNames: {
+        github: 'GitHub Dark',
+        midnight: 'Midnight',
+      },
       guide: {
         title: 'Bem-vindo',
+        welcome: 'Bem-vindo ao meu portfólio.',
         intro:
           'Este é o portfólio de João Rosa Conceição, apresentado como um terminal.',
         explanation:
@@ -134,21 +142,19 @@ export const content = {
         {
           id: 'nav',
           items: [
-            { cmd: 'whoami', hint: 'início' },
-            { cmd: 'about', hint: 'sobre' },
+            { cmd: 'whoami', hint: 'sobre mim' },
             { cmd: 'skills', hint: 'tecnologias' },
-            { cmd: 'projects', hint: 'projetos' },
+            { cmd: 'projects', hint: 'meus projetos' },
             { cmd: 'contact', hint: 'contato' },
           ],
         },
         {
           id: 'sys',
           items: [
-            { cmd: 'lang pt', hint: 'português' },
-            { cmd: 'lang en', hint: 'inglês' },
-            { cmd: 'help', hint: 'comandos' },
-            { cmd: 'clear', hint: 'limpar' },
-            { cmd: 'exit', hint: 'encerrar' },
+            { cmd: 'clear', hint: 'limpar terminal' },
+            { cmd: 'lang', hint: 'trocar idioma' },
+            { cmd: 'theme', hint: 'trocar tema' },
+            { cmd: 'help', hint: 'mostrar comandos' },
           ],
         },
       ],
@@ -163,9 +169,9 @@ export const content = {
   },
   en: {
     meta: {
-      title: 'João Rosa Conceição — Web Developer',
+      title: 'João Rosa Conceição — Full Stack Developer',
       description:
-        'Portfolio of João Rosa Conceição — Web Developer. Web systems with PHP, Laravel and JavaScript.',
+        'Portfolio of João Rosa Conceição — Full Stack Developer. Web systems with PHP, Laravel, Node and JavaScript.',
     },
     a11y: {
       skip: 'Skip to content',
@@ -198,9 +204,9 @@ export const content = {
     hero: {
       command: 'whoami',
       name: 'João Rosa Conceição',
-      role: 'Web Developer',
+      role: 'Full Stack Developer',
       tagline:
-        'I build clear, stable, maintainable web systems — from Laravel backends to interfaces people actually use.',
+        'I build software that lasts — simple to use, solid underneath.',
       available: 'Open to new opportunities.',
     },
     about: {
@@ -208,8 +214,8 @@ export const content = {
       nameLabel: 'Name',
       roleLabel: 'Role',
       name: 'João Rosa Conceição',
-      role: 'Web Developer',
-      bio: 'I am a web developer focused on PHP/Laravel applications and straightforward interfaces. I like turning business rules into organized systems — authentication, permissions, CRUDs and flows that solve real day-to-day work.',
+      role: 'Full Stack Developer',
+      bio: 'I am a full stack developer focused on PHP/Laravel applications and straightforward interfaces. I like turning business rules into organized systems — authentication, permissions, CRUDs and flows that solve real day-to-day work.',
       interests:
         'I mostly work with MVC backends, REST APIs and pragmatic frontends. I care about code quality, DX, and improving the experience of the people who use the product.',
       softCommand: 'skills --soft',
@@ -269,14 +275,22 @@ export const content = {
       placeholder: 'type a command and press Enter',
       legendLabel: 'commands',
       enterHint: 'Enter to run',
-      navGroup: 'navigation',
-      sysGroup: 'system',
-      help: 'Type one of the commands above',
+      navGroup: 'NAVIGATION',
+      sysGroup: 'SYSTEM',
+      help: 'Type one of the commands below',
+      helpHint: 'type help to explore',
       notFound: 'command not found: {cmd} — type help',
       langUsage: 'usage: lang pt | lang en',
       langSet: 'Language: English',
+      themeUsage: 'usage: theme | theme github | theme midnight',
+      themeSet: 'Theme: {theme}',
+      themeNames: {
+        github: 'GitHub Dark',
+        midnight: 'Midnight',
+      },
       guide: {
         title: 'Welcome',
+        welcome: 'Welcome to my portfolio.',
         intro:
           "This is João Rosa Conceição's portfolio, presented as a terminal.",
         explanation:
@@ -294,21 +308,19 @@ export const content = {
         {
           id: 'nav',
           items: [
-            { cmd: 'whoami', hint: 'home' },
-            { cmd: 'about', hint: 'about me' },
-            { cmd: 'skills', hint: 'tech stack' },
-            { cmd: 'projects', hint: 'work' },
-            { cmd: 'contact', hint: 'contact' },
+            { cmd: 'whoami', hint: 'about me' },
+            { cmd: 'skills', hint: 'technologies' },
+            { cmd: 'projects', hint: 'my projects' },
+            { cmd: 'contact', hint: 'contact me' },
           ],
         },
         {
           id: 'sys',
           items: [
-            { cmd: 'lang pt', hint: 'português' },
-            { cmd: 'lang en', hint: 'english' },
-            { cmd: 'help', hint: 'commands' },
-            { cmd: 'clear', hint: 'clear' },
-            { cmd: 'exit', hint: 'close' },
+            { cmd: 'clear', hint: 'clear terminal' },
+            { cmd: 'lang', hint: 'change language' },
+            { cmd: 'theme', hint: 'change theme' },
+            { cmd: 'help', hint: 'show available commands' },
           ],
         },
       ],

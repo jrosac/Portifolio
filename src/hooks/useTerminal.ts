@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
+import { isThemeId, useTheme } from '../theme/ThemeContext'
 
 export type PanelId =
   | 'whoami'
@@ -10,14 +11,23 @@ export type PanelId =
   | 'exit'
 
 export type HistoryItem =
+  | { id: number; kind: 'home' }
   | { id: number; kind: 'help' }
   | { id: number; kind: 'line'; command: string; message?: string; error?: boolean }
 
+const PANELS = new Set<PanelId>([
+  'about',
+  'skills',
+  'projects',
+  'contact',
+])
+
 export function useTerminal() {
   const { setLang, t } = useLanguage()
+  const { setTheme, cycleTheme } = useTheme()
   const nextId = useRef(1)
   const [history, setHistory] = useState<HistoryItem[]>([
-    { id: 0, kind: 'help' },
+    { id: 0, kind: 'home' },
   ])
   const [panel, setPanel] = useState<PanelId | null>(null)
   const [projectId, setProjectId] = useState<string | null>(null)
@@ -53,13 +63,12 @@ export function useTerminal() {
       const [cmd, ...args] = input.split(/\s+/)
       if (!cmd) return
 
+      if (PANELS.has(cmd as PanelId)) {
+        openPanel(input, cmd as PanelId)
+        return
+      }
+
       switch (cmd) {
-        case 'about':
-        case 'skills':
-        case 'projects':
-        case 'contact':
-          openPanel(input, cmd)
-          return
         case 'whoami':
         case 'home':
           openPanel(input, 'whoami')
@@ -68,12 +77,13 @@ export function useTerminal() {
           openPanel(input, 'exit')
           return
         case 'help':
-          echo(input, t.commands.help)
+          echo(input)
+          append({ kind: 'help' })
           setPanel(null)
           setProjectId(null)
           return
         case 'clear':
-          setHistory([{ id: nextId.current++, kind: 'help' }])
+          setHistory([{ id: nextId.current++, kind: 'home' }])
           setPanel(null)
           setProjectId(null)
           return
@@ -87,14 +97,38 @@ export function useTerminal() {
             )
             return
           }
-          echo(input, t.commands.langUsage, true)
+          echo(input, t.commands.langUsage)
+          return
+        }
+        case 'theme': {
+          const next = args[0]
+          if (!next) {
+            const applied = cycleTheme()
+            echo(
+              input,
+              t.commands.themeSet.replace(
+                '{theme}',
+                t.commands.themeNames[applied],
+              ),
+            )
+            return
+          }
+          if (isThemeId(next)) {
+            setTheme(next)
+            echo(
+              input,
+              t.commands.themeSet.replace('{theme}', t.commands.themeNames[next]),
+            )
+            return
+          }
+          echo(input, t.commands.themeUsage, true)
           return
         }
         default:
           echo(input, t.commands.notFound.replace('{cmd}', cmd), true)
       }
     },
-    [append, echo, openPanel, setLang, t],
+    [append, cycleTheme, echo, openPanel, setLang, setTheme, t],
   )
 
   return { history, panel, setPanel, projectId, setProjectId, run }
