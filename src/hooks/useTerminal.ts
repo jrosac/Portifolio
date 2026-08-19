@@ -3,7 +3,7 @@ import { projects } from '../data/projects'
 import { useLanguage } from '../i18n/LanguageContext'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-export type SectionId = 'hero' | 'about' | 'skills' | 'projects' | 'contact' | 'footer'
+export type SectionId = 'help' | 'hero' | 'about' | 'skills' | 'projects' | 'contact' | 'footer'
 
 export function useTerminal() {
   const { setLang, t } = useLanguage()
@@ -61,7 +61,8 @@ export function useTerminal() {
           setFeedback(null)
           return
         case 'help':
-          setFeedback(t.commands.help)
+          scrollTo('help')
+          setFeedback(null)
           return
         case 'lang': {
           const next = args[0]
