@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
+import { Cursor } from '../terminal/Cursor'
 
-type StickyNavProps = {
+type CommandBarProps = {
   onCommand: (value: string) => void
   feedback: string | null
 }
 
-export function StickyNav({ onCommand, feedback }: StickyNavProps) {
+export function CommandBar({ onCommand, feedback }: CommandBarProps) {
   const { lang, setLang, t } = useLanguage()
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
@@ -28,83 +29,59 @@ export function StickyNav({ onCommand, feedback }: StickyNavProps) {
     focusPrompt()
   }
 
-  const run = (command: string) => {
-    onCommand(command)
-    setValue('')
-    focusPrompt()
-  }
-
   return (
     <div className="z-20 shrink-0 border-b border-border bg-terminal/95 backdrop-blur">
-      <div className="flex items-center justify-end px-3 pt-2 sm:px-4 md:px-6">
+      <form
+        onSubmit={submit}
+        className="flex items-baseline gap-3 px-3 py-2.5 sm:px-4 md:px-6"
+      >
+        <label className="flex min-w-0 flex-1 cursor-text flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
+          <span className="shrink-0">
+            <span className="text-accent">joao</span>
+            <span className="text-muted">@portfolio</span>
+            <span className="text-fg">:~$</span>
+          </span>
+          <span className="relative min-w-[8rem] flex-1">
+            <input
+              ref={inputRef}
+              value={value}
+              onChange={(event) => setValue(event.target.value)}
+              aria-label={t.a11y.commandInput}
+              autoComplete="off"
+              spellCheck={false}
+              className="absolute inset-0 z-10 w-full bg-transparent caret-transparent text-transparent outline-none"
+            />
+            <span className="pointer-events-none inline-flex min-h-[1.25em] max-w-full flex-wrap items-baseline whitespace-pre-wrap break-all text-fg">
+              {value}
+              <Cursor />
+            </span>
+          </span>
+        </label>
+
         <div
-          className="flex items-center gap-1 text-xs sm:text-sm"
+          className="shrink-0 self-start pt-0.5 text-xs"
           role="group"
           aria-label={t.a11y.langSwitch}
         >
           <button
             type="button"
             onClick={() => setLang('pt')}
-            className={`px-1.5 py-1 ${lang === 'pt' ? 'text-accent' : 'text-muted hover:text-fg'}`}
+            className={`px-1 ${lang === 'pt' ? 'text-accent' : 'text-muted hover:text-fg'}`}
             aria-pressed={lang === 'pt'}
           >
             PT
           </button>
-          <span className="text-border">|</span>
+          <span className="text-border">/</span>
           <button
             type="button"
             onClick={() => setLang('en')}
-            className={`px-1.5 py-1 ${lang === 'en' ? 'text-accent' : 'text-muted hover:text-fg'}`}
+            className={`px-1 ${lang === 'en' ? 'text-accent' : 'text-muted hover:text-fg'}`}
             aria-pressed={lang === 'en'}
           >
             EN
           </button>
         </div>
-      </div>
-
-      <form onSubmit={submit} className="px-3 pb-2 sm:px-4 md:px-6">
-        <label className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-          <span className="shrink-0">
-            <span className="text-accent">joao</span>
-            <span className="text-muted">@portfolio</span>
-            <span className="text-fg">:~$</span>
-          </span>
-          <input
-            ref={inputRef}
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-            placeholder={t.commands.placeholder}
-            aria-label={t.a11y.commandInput}
-            autoComplete="off"
-            spellCheck={false}
-            className="min-w-[12rem] flex-1 bg-transparent caret-accent text-fg outline-none placeholder:text-muted/55"
-          />
-        </label>
       </form>
-
-      <div className="border-t border-border/70 px-3 py-2 sm:px-4 md:px-6">
-        <p className="mb-1.5 text-[10px] uppercase tracking-wider text-muted">
-          {t.commands.legendLabel}
-          <span className="normal-case tracking-normal">
-            {' '}
-            · {t.commands.enterHint}
-          </span>
-        </p>
-        <ul className="flex flex-wrap gap-x-3 gap-y-1">
-          {t.commands.list.map((item) => (
-            <li key={item.cmd}>
-              <button
-                type="button"
-                onClick={() => run(item.cmd)}
-                className="text-left text-xs"
-              >
-                <span className="text-command hover:text-accent">{item.cmd}</span>
-                <span className="text-muted"> — {item.hint}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
 
       {feedback ? (
         <p
@@ -112,9 +89,58 @@ export function StickyNav({ onCommand, feedback }: StickyNavProps) {
             feedback.includes('not found') ? 'text-[#f85149]' : 'text-muted'
           }`}
         >
+          <span className="text-command">&gt; </span>
           {feedback}
         </p>
       ) : null}
+    </div>
+  )
+}
+
+type CommandLegendProps = {
+  onCommand: (value: string) => void
+}
+
+export function CommandLegend({ onCommand }: CommandLegendProps) {
+  const { t } = useLanguage()
+
+  const groupLabel = (id: string) =>
+    id === 'nav' ? t.commands.navGroup : t.commands.sysGroup
+
+  return (
+    <div
+      id="help"
+      className="border-b border-border/80 bg-surface/40 px-3 py-3 sm:px-4 md:px-6"
+    >
+      <p className="mb-3 text-[10px] tracking-wider text-muted">
+        <span className="text-command">#</span> {t.commands.legendLabel}
+        <span className="text-border"> · </span>
+        {t.commands.enterHint}
+      </p>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {t.commands.groups.map((group) => (
+          <div key={group.id}>
+            <p className="mb-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
+              {groupLabel(group.id)}
+            </p>
+            <ul className="divide-y divide-border/60 border border-border/70 bg-terminal/60">
+              {group.items.map((item) => (
+                <li key={item.cmd}>
+                  <button
+                    type="button"
+                    onClick={() => onCommand(item.cmd)}
+                    className="grid w-full grid-cols-[6.5rem_1fr] items-baseline gap-3 px-2.5 py-1.5 text-left text-xs transition-colors hover:bg-raised"
+                  >
+                    <span className="truncate text-command">{item.cmd}</span>
+                    <span className="truncate text-muted">{item.hint}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
