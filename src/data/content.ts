@@ -154,11 +154,11 @@ export const content = {
       ],
     },
     contacts: {
-      email: 'hello@example.com',
-      githubLabel: 'github.com/seu-user',
-      githubUrl: 'https://github.com/seu-user',
-      linkedinLabel: 'linkedin.com/in/seu-perfil',
-      linkedinUrl: 'https://linkedin.com/in/seu-perfil',
+      email: 'jrosacontacts@gmail.com',
+      githubLabel: 'github.com/jrosac',
+      githubUrl: 'https://github.com/jrosac',
+      linkedinLabel: 'linkedin.com/in/joaorosaconceicao',
+      linkedinUrl: 'https://www.linkedin.com/in/joaorosaconceicao/',
     },
   },
   en: {
@@ -314,11 +314,11 @@ export const content = {
       ],
     },
     contacts: {
-      email: 'hello@example.com',
-      githubLabel: 'github.com/seu-user',
-      githubUrl: 'https://github.com/seu-user',
-      linkedinLabel: 'linkedin.com/in/seu-perfil',
-      linkedinUrl: 'https://linkedin.com/in/seu-perfil',
+      email: 'jrosacontacts@gmail.com',
+      githubLabel: 'github.com/jrosac',
+      githubUrl: 'https://github.com/jrosac',
+      linkedinLabel: 'linkedin.com/in/joaorosaconceicao',
+      linkedinUrl: 'https://www.linkedin.com/in/joaorosaconceicao/',
     },
   },
 } as const
