@@ -20,10 +20,9 @@ export const skillCategories: SkillCategory[] = [
     items: [
       { name: 'PHP', level: 'strong' },
       { name: 'Laravel', level: 'strong' },
+      { name: 'Node', level: 'strong' },
       { name: 'APIs REST', level: 'strong' },
       { name: 'MVC', level: 'strong' },
-      { name: 'Autenticação', level: 'working' },
-      { name: 'Autorização', level: 'working' },
     ],
   },
   {
@@ -35,7 +34,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'CSS', level: 'strong' },
       { name: 'JavaScript', level: 'strong' },
       { name: 'Bootstrap', level: 'working' },
-      { name: 'AdminLTE', level: 'working' },
+      { name: 'Tailwind', level: 'working' },
       { name: 'DataTables', level: 'working' },
     ],
   },
@@ -45,6 +44,7 @@ export const skillCategories: SkillCategory[] = [
     label: { pt: 'Banco de Dados', en: 'Database' },
     items: [
       { name: 'MySQL', level: 'strong' },
+      { name: 'SQLite', level: 'working' },
       { name: 'Oracle', level: 'familiar' },
       { name: 'SQL', level: 'strong' },
     ],
@@ -56,9 +56,9 @@ export const skillCategories: SkillCategory[] = [
     items: [
       { name: 'Git', level: 'strong' },
       { name: 'GitHub', level: 'strong' },
-      { name: 'Composer', level: 'working' },
-      { name: 'NPM', level: 'working' },
-      { name: 'Vite', level: 'familiar' },
+      { name: 'GitLab', level: 'strong' },
+      { name: 'Firebase', level: 'working' },
+      { name: 'Supabase', level: 'working' },
     ],
   },
 ]
