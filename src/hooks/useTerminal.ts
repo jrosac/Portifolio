@@ -1,34 +1,49 @@
-import { useCallback, useState } from 'react'
-import { projects } from '../data/projects'
+import { useCallback, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
-import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
-export type SectionId = 'help' | 'hero' | 'about' | 'skills' | 'projects' | 'contact' | 'footer'
+export type PanelId =
+  | 'whoami'
+  | 'about'
+  | 'skills'
+  | 'projects'
+  | 'contact'
+  | 'exit'
+
+export type HistoryItem =
+  | { id: number; kind: 'help' }
+  | { id: number; kind: 'line'; command: string; message?: string; error?: boolean }
 
 export function useTerminal() {
   const { setLang, t } = useLanguage()
-  const reduced = usePrefersReducedMotion()
+  const nextId = useRef(1)
+  const [history, setHistory] = useState<HistoryItem[]>([
+    { id: 0, kind: 'help' },
+  ])
+  const [panel, setPanel] = useState<PanelId | null>(null)
   const [projectId, setProjectId] = useState<string | null>(null)
-  const [feedback, setFeedback] = useState<string | null>(null)
 
-  const scrollTo = useCallback(
-    (id: SectionId) => {
-      const scroller = document.getElementById('main')
-      const node = document.getElementById(id)
-      if (!scroller || !node) return
-
-      const nextTop =
-        scroller.scrollTop +
-        node.getBoundingClientRect().top -
-        scroller.getBoundingClientRect().top
-
-      scroller.scrollTo({
-        top: nextTop,
-        behavior: reduced ? 'auto' : 'smooth',
-      })
-      window.scrollTo(0, 0)
+  const append = useCallback(
+    (item: Omit<HistoryItem, 'id'> | HistoryItem) => {
+      const id = nextId.current++
+      setHistory((current) => [...current, { ...item, id } as HistoryItem])
     },
-    [reduced],
+    [],
+  )
+
+  const echo = useCallback(
+    (command: string, message?: string, error = false) => {
+      append({ kind: 'line', command, message, error })
+    },
+    [append],
+  )
+
+  const openPanel = useCallback(
+    (command: string, next: PanelId) => {
+      echo(command)
+      setProjectId(null)
+      setPanel(next)
+    },
+    [echo],
   )
 
   const run = useCallback(
@@ -43,58 +58,44 @@ export function useTerminal() {
         case 'skills':
         case 'projects':
         case 'contact':
-          scrollTo(cmd)
-          setFeedback(null)
+          openPanel(input, cmd)
           return
         case 'whoami':
         case 'home':
-        case 'clear':
-          if (cmd === 'clear') {
-            setFeedback(null)
-            return
-          }
-          scrollTo('hero')
-          setFeedback(null)
+          openPanel(input, 'whoami')
           return
         case 'exit':
-          scrollTo('footer')
-          setFeedback(null)
+          openPanel(input, 'exit')
           return
         case 'help':
-          scrollTo('help')
-          setFeedback(null)
+          echo(input, t.commands.help)
+          setPanel(null)
+          setProjectId(null)
+          return
+        case 'clear':
+          setHistory([{ id: nextId.current++, kind: 'help' }])
+          setPanel(null)
+          setProjectId(null)
           return
         case 'lang': {
           const next = args[0]
           if (next === 'pt' || next === 'en') {
             setLang(next)
-            setFeedback(
+            echo(
+              input,
               next === 'pt' ? 'Idioma: Português' : 'Language: English',
             )
             return
           }
-          setFeedback(t.commands.langUsage)
-          return
-        }
-        case 'open': {
-          const token = args[0]?.replace(/^#/, '') ?? ''
-          const id = token.padStart(2, '0')
-          const exists = projects.some((project) => project.id === id)
-          if (exists) {
-            setProjectId(id)
-            scrollTo('projects')
-            setFeedback(null)
-            return
-          }
-          setFeedback(t.commands.projectNotFound)
+          echo(input, t.commands.langUsage, true)
           return
         }
         default:
-          setFeedback(t.commands.notFound.replace('{cmd}', cmd))
+          echo(input, t.commands.notFound.replace('{cmd}', cmd), true)
       }
     },
-    [scrollTo, setLang, t],
+    [append, echo, openPanel, setLang, t],
   )
 
-  return { projectId, setProjectId, feedback, run, scrollTo }
+  return { history, panel, setPanel, projectId, setProjectId, run }
 }

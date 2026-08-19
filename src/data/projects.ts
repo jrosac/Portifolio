@@ -17,6 +17,42 @@ export const projects: Project[] = [
   {
     id: '01',
     featured: true,
+    image: '/projects/portfolio.svg',
+    liveUrl: '/',
+    githubUrl: '#',
+    technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion'],
+    name: {
+      pt: 'Portfólio Terminal',
+      en: 'Terminal Portfolio',
+    },
+    summary: {
+      pt: 'Este site — portfólio em estética de terminal, bilíngue e interativo.',
+      en: 'This site — a bilingual, interactive terminal-style portfolio.',
+    },
+    description: {
+      pt: 'Página única com identidade de terminal: inicialização, prompt com comandos (about, skills, projects, contact), navegação por teclado e por cliques, troca PT/EN e apresentação de projetos em janela. Feito com React, TypeScript, Vite e Tailwind.',
+      en: 'A single-page portfolio with a terminal identity: boot sequence, a command prompt (about, skills, projects, contact), keyboard and click navigation, PT/EN toggle, and project details in a modal. Built with React, TypeScript, Vite and Tailwind.',
+    },
+    features: {
+      pt: [
+        'Prompt interativo com comandos',
+        'Interface bilíngue PT/EN',
+        'Sequência de inicialização e animações leves',
+        'Listagem de projetos em estilo terminal',
+        'Layout responsivo',
+      ],
+      en: [
+        'Interactive command prompt',
+        'Bilingual PT/EN interface',
+        'Boot sequence and light animations',
+        'Terminal-style project listing',
+        'Responsive layout',
+      ],
+    },
+  },
+  {
+    id: '02',
+    featured: true,
     image: '/projects/01.svg',
     liveUrl: '#',
     githubUrl: '#',
@@ -26,7 +62,7 @@ export const projects: Project[] = [
       en: 'Management System',
     },
     summary: {
-      pt: 'Aplicação web para organizar operações, utilizadores e permissões.',
+      pt: 'Aplicação web para organizar operações, usuários e permissões.',
       en: 'Web app to organize operations, users and permissions.',
     },
     description: {
@@ -39,7 +75,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: '02',
+    id: '03',
     featured: true,
     image: '/projects/02.svg',
     liveUrl: '#',
@@ -50,7 +86,7 @@ export const projects: Project[] = [
       en: 'Finance Manager',
     },
     summary: {
-      pt: 'Controlo de receitas, despesas e visão mensal do fluxo.',
+      pt: 'Controle de receitas, despesas e visão mensal do fluxo.',
       en: 'Income and expense tracking with a monthly cash-flow view.',
     },
     description: {
@@ -63,7 +99,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: '03',
+    id: '04',
     featured: false,
     image: '/projects/03.svg',
     liveUrl: null,
@@ -74,7 +110,7 @@ export const projects: Project[] = [
       en: 'Attachments System',
     },
     summary: {
-      pt: 'Upload, organização e consulta de ficheiros ligados a registos.',
+      pt: 'Upload, organização e consulta de arquivos ligados a registros.',
       en: 'Upload, organize and browse files linked to records.',
     },
     description: {
@@ -82,12 +118,12 @@ export const projects: Project[] = [
       en: 'Attachments module with upload, listing and entity association. Placeholder — replace with the real project description.',
     },
     features: {
-      pt: ['Upload', 'Listagem', 'Associação a registos', 'Download'],
+      pt: ['Upload', 'Listagem', 'Associação a registros', 'Download'],
       en: ['Upload', 'Listing', 'Record association', 'Download'],
     },
   },
   {
-    id: '04',
+    id: '05',
     featured: false,
     image: '/projects/04.svg',
     liveUrl: null,
