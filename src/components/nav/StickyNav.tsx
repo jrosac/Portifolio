@@ -1,24 +1,23 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
-import type { SectionId } from '../../hooks/useTerminal'
-
-const SECTIONS: { id: Extract<SectionId, 'about' | 'skills' | 'projects' | 'contact'>; key: 'about' | 'skills' | 'projects' | 'contact' }[] =
-  [
-    { id: 'about', key: 'about' },
-    { id: 'skills', key: 'skills' },
-    { id: 'projects', key: 'projects' },
-    { id: 'contact', key: 'contact' },
-  ]
 
 type StickyNavProps = {
-  onNavigate: (id: SectionId) => void
   onCommand: (value: string) => void
   feedback: string | null
 }
 
-export function StickyNav({ onNavigate, onCommand, feedback }: StickyNavProps) {
+export function StickyNav({ onCommand, feedback }: StickyNavProps) {
   const { lang, setLang, t } = useLanguage()
   const [value, setValue] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const focusPrompt = () => {
+    inputRef.current?.focus({ preventScroll: true })
+  }
+
+  useEffect(() => {
+    focusPrompt()
+  }, [])
 
   const submit = (event: FormEvent) => {
     event.preventDefault()
@@ -26,28 +25,20 @@ export function StickyNav({ onNavigate, onCommand, feedback }: StickyNavProps) {
     if (!next) return
     onCommand(next)
     setValue('')
+    focusPrompt()
+  }
+
+  const run = (command: string) => {
+    onCommand(command)
+    setValue('')
+    focusPrompt()
   }
 
   return (
-    <div className="shrink-0 border-b border-border bg-terminal/95 backdrop-blur">
-      <nav
-        className="flex flex-wrap items-center gap-2 px-3 py-2 sm:px-4 md:px-6"
-        aria-label="sections"
-      >
-        {SECTIONS.map((section) => (
-          <button
-            key={section.id}
-            type="button"
-            onClick={() => onNavigate(section.id)}
-            className="whitespace-nowrap rounded border border-border bg-surface px-2 py-1 text-xs text-fg transition-colors hover:border-accent/50 hover:text-accent sm:text-sm"
-          >
-            <span className="text-muted">$ </span>
-            {t.nav[section.key]}
-          </button>
-        ))}
-
+    <div className="z-20 shrink-0 border-b border-border bg-terminal/95 backdrop-blur">
+      <div className="flex items-center justify-end px-3 pt-2 sm:px-4 md:px-6">
         <div
-          className="ml-auto flex items-center gap-1 text-xs sm:text-sm"
+          className="flex items-center gap-1 text-xs sm:text-sm"
           role="group"
           aria-label={t.a11y.langSwitch}
         >
@@ -69,28 +60,58 @@ export function StickyNav({ onNavigate, onCommand, feedback }: StickyNavProps) {
             EN
           </button>
         </div>
-      </nav>
+      </div>
 
-      <form
-        onSubmit={submit}
-        className="hidden border-t border-border/70 px-4 py-2 md:flex md:px-6"
-      >
-        <label className="flex w-full items-center gap-2 text-sm">
-          <span className="shrink-0 text-accent">$</span>
+      <form onSubmit={submit} className="px-3 pb-2 sm:px-4 md:px-6">
+        <label className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+          <span className="shrink-0">
+            <span className="text-accent">joao</span>
+            <span className="text-muted">@portfolio</span>
+            <span className="text-fg">:~$</span>
+          </span>
           <input
+            ref={inputRef}
             value={value}
             onChange={(event) => setValue(event.target.value)}
             placeholder={t.commands.placeholder}
             aria-label={t.a11y.commandInput}
             autoComplete="off"
             spellCheck={false}
-            className="w-full bg-transparent text-fg outline-none placeholder:text-muted/70"
+            className="min-w-[12rem] flex-1 bg-transparent caret-accent text-fg outline-none placeholder:text-muted/55"
           />
         </label>
       </form>
 
+      <div className="border-t border-border/70 px-3 py-2 sm:px-4 md:px-6">
+        <p className="mb-1.5 text-[10px] uppercase tracking-wider text-muted">
+          {t.commands.legendLabel}
+          <span className="normal-case tracking-normal">
+            {' '}
+            · {t.commands.enterHint}
+          </span>
+        </p>
+        <ul className="flex flex-wrap gap-x-3 gap-y-1">
+          {t.commands.list.map((item) => (
+            <li key={item.cmd}>
+              <button
+                type="button"
+                onClick={() => run(item.cmd)}
+                className="text-left text-xs"
+              >
+                <span className="text-command hover:text-accent">{item.cmd}</span>
+                <span className="text-muted"> — {item.hint}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {feedback ? (
-        <p className="border-t border-border/70 px-4 py-2 text-xs text-muted md:px-6">
+        <p
+          className={`border-t border-border/70 px-3 py-2 text-xs md:px-6 ${
+            feedback.includes('not found') ? 'text-[#f85149]' : 'text-muted'
+          }`}
+        >
           {feedback}
         </p>
       ) : null}
