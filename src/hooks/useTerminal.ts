@@ -13,18 +13,27 @@ export function useTerminal() {
 
   const scrollTo = useCallback(
     (id: SectionId) => {
+      const scroller = document.getElementById('main')
       const node = document.getElementById(id)
-      node?.scrollIntoView({
+      if (!scroller || !node) return
+
+      const nextTop =
+        scroller.scrollTop +
+        node.getBoundingClientRect().top -
+        scroller.getBoundingClientRect().top
+
+      scroller.scrollTo({
+        top: nextTop,
         behavior: reduced ? 'auto' : 'smooth',
-        block: 'start',
       })
+      window.scrollTo(0, 0)
     },
     [reduced],
   )
 
   const run = useCallback(
     (raw: string) => {
-      const input = raw.trim().toLowerCase()
+      const input = raw.trim().replace(/^\$\s*/, '').toLowerCase()
       if (!input) return
       const [cmd, ...args] = input.split(/\s+/)
       if (!cmd) return
