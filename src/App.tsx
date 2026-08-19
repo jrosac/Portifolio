@@ -3,7 +3,7 @@ import { LanguageProvider, useLanguage } from './i18n/LanguageContext'
 import { MotionConfig } from 'framer-motion'
 import { useTerminal } from './hooks/useTerminal'
 import { TerminalChrome } from './components/terminal/TerminalChrome'
-import { StickyNav } from './components/nav/StickyNav'
+import { CommandBar, CommandLegend } from './components/nav/StickyNav'
 import { BootScreen } from './components/sections/BootScreen'
 import { Hero } from './components/sections/Hero'
 import { About } from './components/sections/About'
@@ -59,11 +59,12 @@ function Portfolio() {
       </a>
 
       <TerminalChrome>
-        <StickyNav onCommand={run} feedback={feedback} />
+        <CommandBar onCommand={run} feedback={feedback} />
         <main
           id="main"
           className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain"
         >
+          <CommandLegend onCommand={run} />
           <Hero />
           <About />
           <Skills />
