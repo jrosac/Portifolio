@@ -4,13 +4,14 @@ import { useLanguage } from '../../i18n/LanguageContext'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { Cursor } from '../terminal/Cursor'
 import { Prompt } from '../terminal/Prompt'
+import { LanguageSwitch } from '../nav/LanguageSwitch'
 
 type BootScreenProps = {
   onEnter: () => void
 }
 
 export function BootScreen({ onEnter }: BootScreenProps) {
-  const { lang, setLang, t } = useLanguage()
+  const { t } = useLanguage()
   const reduced = usePrefersReducedMotion()
   const [step, setStep] = useState(reduced ? t.bootLines.length : 0)
   const logsDone = step >= t.bootLines.length
@@ -35,25 +36,9 @@ export function BootScreen({ onEnter }: BootScreenProps) {
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-terminal px-4 py-6 text-sm sm:px-8">
       <div className="mb-6 flex items-center justify-between gap-3">
-        <p className="text-xs text-muted">boot sequence</p>
+        <p className="text-xs text-muted">{t.boot.sequence}</p>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 text-xs">
-            <button
-              type="button"
-              onClick={() => setLang('pt')}
-              className={lang === 'pt' ? 'text-accent' : 'text-muted hover:text-fg'}
-            >
-              PT
-            </button>
-            <span className="text-border">|</span>
-            <button
-              type="button"
-              onClick={() => setLang('en')}
-              className={lang === 'en' ? 'text-accent' : 'text-muted hover:text-fg'}
-            >
-              EN
-            </button>
-          </div>
+          <LanguageSwitch />
           <button
             type="button"
             onClick={onEnter}
