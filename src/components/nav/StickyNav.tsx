@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext'
 import { Cursor } from '../terminal/Cursor'
+import { Prompt } from '../terminal/Prompt'
+import type { HistoryItem } from '../../hooks/useTerminal'
 
 type CommandBarProps = {
   onCommand: (value: string) => void
-  feedback: string | null
 }
 
-export function CommandBar({ onCommand, feedback }: CommandBarProps) {
-  const { lang, setLang, t } = useLanguage()
+export function CommandBar({ onCommand }: CommandBarProps) {
+  const { t } = useLanguage()
   const [value, setValue] = useState('')
+  const [focused, setFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const focusPrompt = () => {
@@ -30,67 +32,48 @@ export function CommandBar({ onCommand, feedback }: CommandBarProps) {
   }
 
   return (
-    <div className="z-20 shrink-0 border-b border-border bg-terminal/95 backdrop-blur">
-      <form
-        onSubmit={submit}
-        className="flex items-baseline gap-3 px-3 py-2.5 sm:px-4 md:px-6"
-      >
-        <label className="flex min-w-0 flex-1 cursor-text flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
-          <span className="shrink-0">
-            <span className="text-accent">joao</span>
-            <span className="text-muted">@portfolio</span>
-            <span className="text-fg">:~$</span>
+    <form
+      onSubmit={submit}
+      className="flex items-baseline gap-3 px-4 py-1 sm:px-6 md:px-8"
+    >
+      <label className="flex min-w-0 flex-1 cursor-text flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
+        <span className="shrink-0">
+          <span className="text-accent">joao</span>
+          <span className="text-muted">@portfolio</span>
+          <span className="text-fg">:~$</span>
+        </span>
+        <span className="relative min-w-[8rem] flex-1">
+          <input
+            id="command-input"
+            ref={inputRef}
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            aria-label={t.a11y.commandInput}
+            autoComplete="off"
+            spellCheck={false}
+            className="absolute inset-0 z-10 w-full bg-transparent caret-transparent text-transparent outline-none"
+          />
+          <span className="pointer-events-none inline-flex min-h-[1.25em] max-w-full flex-wrap items-baseline whitespace-pre-wrap break-all text-fg">
+            {value}
+            {focused ? <Cursor /> : null}
           </span>
-          <span className="relative min-w-[8rem] flex-1">
-            <input
-              ref={inputRef}
-              value={value}
-              onChange={(event) => setValue(event.target.value)}
-              aria-label={t.a11y.commandInput}
-              autoComplete="off"
-              spellCheck={false}
-              className="absolute inset-0 z-10 w-full bg-transparent caret-transparent text-transparent outline-none"
-            />
-            <span className="pointer-events-none inline-flex min-h-[1.25em] max-w-full flex-wrap items-baseline whitespace-pre-wrap break-all text-fg">
-              {value}
-              <Cursor />
-            </span>
-          </span>
-        </label>
+        </span>
+      </label>
+    </form>
+  )
+}
 
-        <div
-          className="shrink-0 self-start pt-0.5 text-xs"
-          role="group"
-          aria-label={t.a11y.langSwitch}
-        >
-          <button
-            type="button"
-            onClick={() => setLang('pt')}
-            className={`px-1 ${lang === 'pt' ? 'text-accent' : 'text-muted hover:text-fg'}`}
-            aria-pressed={lang === 'pt'}
-          >
-            PT
-          </button>
-          <span className="text-border">/</span>
-          <button
-            type="button"
-            onClick={() => setLang('en')}
-            className={`px-1 ${lang === 'en' ? 'text-accent' : 'text-muted hover:text-fg'}`}
-            aria-pressed={lang === 'en'}
-          >
-            EN
-          </button>
-        </div>
-      </form>
-
-      {feedback ? (
+export function HistoryLine({ item }: { item: Extract<HistoryItem, { kind: 'line' }> }) {
+  return (
+    <div className="px-4 py-1 sm:px-6 md:px-8">
+      <Prompt command={item.command} className="text-sm" />
+      {item.message ? (
         <p
-          className={`border-t border-border/70 px-3 py-2 text-xs md:px-6 ${
-            feedback.includes('not found') ? 'text-[#f85149]' : 'text-muted'
-          }`}
+          className={`mt-1 text-xs ${item.error ? 'text-[#f85149]' : 'text-muted'}`}
         >
-          <span className="text-command">&gt; </span>
-          {feedback}
+          {item.message}
         </p>
       ) : null}
     </div>
@@ -108,10 +91,28 @@ export function CommandLegend({ onCommand }: CommandLegendProps) {
     id === 'nav' ? t.commands.navGroup : t.commands.sysGroup
 
   return (
-    <div
-      id="help"
-      className="border-b border-border/80 bg-surface/40 px-3 py-3 sm:px-4 md:px-6"
-    >
+    <div className="px-4 py-3 sm:px-6 md:px-8">
+      <div className="mb-5 max-w-3xl space-y-3 text-sm">
+        <h1 className="text-base font-medium text-accent">{t.commands.guide.title}</h1>
+        <p className="text-fg">{t.commands.guide.intro}</p>
+        <p className="text-muted">{t.commands.guide.explanation}</p>
+        <div>
+          <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
+            {t.commands.guide.manualTitle}
+          </p>
+          <ol className="space-y-1 text-xs text-fg">
+            {t.commands.guide.steps.map((step, index) => (
+              <li key={step} className="flex gap-3">
+                <span className="text-muted">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
       <p className="mb-3 text-[10px] tracking-wider text-muted">
         <span className="text-command">#</span> {t.commands.legendLabel}
         <span className="text-border"> · </span>
@@ -124,7 +125,7 @@ export function CommandLegend({ onCommand }: CommandLegendProps) {
             <p className="mb-1.5 text-[10px] font-medium uppercase tracking-[0.16em] text-muted">
               {groupLabel(group.id)}
             </p>
-            <ul className="divide-y divide-border/60 border border-border/70 bg-terminal/60">
+            <ul className="divide-y divide-border/60 border border-border/70 bg-surface/40">
               {group.items.map((item) => (
                 <li key={item.cmd}>
                   <button
