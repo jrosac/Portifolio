@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext'
 import { MotionConfig } from 'framer-motion'
 import { useTerminal } from './hooks/useTerminal'
@@ -37,22 +37,29 @@ function Portfolio() {
     setBooted(true)
   }, [])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [booted])
+
   if (!booted) {
     return <BootScreen onEnter={enter} />
   }
 
   return (
     <>
-      <a className="skip-link" href="#hero">
+      <a
+        className="skip-link"
+        href="#hero"
+        onClick={(event) => {
+          event.preventDefault()
+          scrollTo('hero')
+        }}
+      >
         {t.a11y.skip}
       </a>
 
       <TerminalChrome>
-        <StickyNav
-          onNavigate={scrollTo}
-          onCommand={run}
-          feedback={feedback}
-        />
+        <StickyNav onCommand={run} feedback={feedback} />
         <main
           id="main"
           className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain"
