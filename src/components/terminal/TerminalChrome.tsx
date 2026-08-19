@@ -7,7 +7,7 @@ type TerminalChromeProps = {
 
 export function TerminalChrome({ children }: TerminalChromeProps) {
   return (
-    <div className="h-dvh bg-[#07090d] p-2 sm:p-3 lg:p-4">
+    <div className="h-dvh bg-page p-2 sm:p-3 lg:p-4">
       <div className="mx-auto flex h-full min-h-0 min-w-0 w-full max-w-[92rem] flex-col overflow-hidden rounded-lg border border-border bg-terminal md:rounded-xl md:shadow-[0_24px_80px_rgba(0,0,0,0.55)]">
         <header className="flex shrink-0 items-center gap-3 border-b border-border bg-surface px-3 py-2 md:px-4">
           <div className="flex w-16 shrink-0 gap-1.5" aria-hidden="true">

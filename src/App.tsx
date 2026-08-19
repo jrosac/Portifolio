@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext'
+import { ThemeProvider } from './theme/ThemeContext'
 import { MotionConfig } from 'framer-motion'
 import { useTerminal, type PanelId } from './hooks/useTerminal'
 import { TerminalChrome } from './components/terminal/TerminalChrome'
@@ -8,9 +9,9 @@ import {
   CommandBar,
   CommandLegend,
   HistoryLine,
+  HomeScreen,
 } from './components/nav/StickyNav'
 import { BootScreen } from './components/sections/BootScreen'
-import { Hero } from './components/sections/Hero'
 import { About } from './components/sections/About'
 import { Skills } from './components/sections/Skills'
 import { Projects } from './components/sections/Projects'
@@ -21,7 +22,7 @@ import { Footer } from './components/sections/Footer'
 const BOOT_KEY = 'portfolio-booted'
 
 const PANEL_META: Record<PanelId, { command: string; labelledBy: string }> = {
-  whoami: { command: 'whoami', labelledBy: 'whoami-title' },
+  whoami: { command: 'whoami', labelledBy: 'about-title' },
   about: { command: 'about', labelledBy: 'about-title' },
   skills: { command: 'skills', labelledBy: 'skills-title' },
   projects: { command: 'projects', labelledBy: 'projects-title' },
@@ -87,7 +88,9 @@ function Portfolio() {
           className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain py-3"
         >
           {history.map((item) =>
-            item.kind === 'help' ? (
+            item.kind === 'home' ? (
+              <HomeScreen key={item.id} />
+            ) : item.kind === 'help' ? (
               <CommandLegend key={item.id} onCommand={run} />
             ) : (
               <HistoryLine key={item.id} item={item} />
@@ -104,8 +107,7 @@ function Portfolio() {
         onClose={closePanel}
         ignoreEscape={Boolean(projectId)}
       >
-        {panel === 'whoami' ? <Hero /> : null}
-        {panel === 'about' ? <About /> : null}
+        {panel === 'whoami' || panel === 'about' ? <About /> : null}
         {panel === 'skills' ? <Skills /> : null}
         {panel === 'projects' ? (
           <Projects onOpen={setProjectId} />
@@ -124,10 +126,12 @@ function Portfolio() {
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <MotionConfig reducedMotion="user">
-        <Portfolio />
-      </MotionConfig>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <MotionConfig reducedMotion="user">
+          <Portfolio />
+        </MotionConfig>
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }
