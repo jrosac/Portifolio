@@ -59,7 +59,7 @@ export function IdentityBanner() {
 
         <motion.p
           variants={fade}
-          className="max-w-md text-sm leading-relaxed text-muted sm:text-[0.95rem]"
+          className="max-w-xl text-sm leading-relaxed text-muted sm:text-[0.95rem]"
         >
           {t.hero.tagline}
         </motion.p>

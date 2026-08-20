@@ -40,7 +40,7 @@ export const content = {
       name: 'João Rosa Conceição',
       role: 'Desenvolvedor Full Stack',
       tagline:
-        'Eu construo software para durar — simples de usar, sólido por baixo.',
+        'Meu portfólio interativo. Navegue por comandos para conhecer quem sou, as tecnologias que uso e os projetos que desenvolvi.',
       available: 'Disponível para novos desafios.',
     },
     about: {
@@ -206,7 +206,7 @@ export const content = {
       name: 'João Rosa Conceição',
       role: 'Full Stack Developer',
       tagline:
-        'I build software that lasts — simple to use, solid underneath.',
+        'My interactive portfolio. Use commands to explore who I am, the technologies I work with and the projects I have built.',
       available: 'Open to new opportunities.',
     },
     about: {
