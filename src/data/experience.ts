@@ -59,8 +59,8 @@ export const experience: ExperienceItem[] = [
       en: 'SofTeam | Junior Computing Enterprise',
     },
     period: {
-      pt: 'jan. 2025 — atual',
-      en: 'Jan 2025 — present',
+      pt: 'jan. 2025 — mar. 2026',
+      en: 'Jan 2025 — Mar 2026',
     },
     location: {
       pt: 'Aracaju, Sergipe',
