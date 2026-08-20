@@ -53,7 +53,7 @@ export const projects: Project[] = [
   {
     id: '02',
     featured: true,
-    image: '/projects/02.svg',
+    image: '/projects/finControl.png',
     liveUrl: null,
     githubUrl: 'https://github.com/jrosac/Fincontrol',
     technologies: [
@@ -98,7 +98,7 @@ export const projects: Project[] = [
   {
     id: '03',
     featured: true,
-    image: '/projects/01.svg',
+    image: '#',
     liveUrl: null,
     githubUrl: 'https://github.com/jrosac/Cripto-analyze',
     technologies: ['React', 'TypeScript', 'Vite', 'React Router'],
