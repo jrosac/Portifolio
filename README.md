@@ -41,6 +41,7 @@ O site é estático (não tem backend). Conteúdo, habilidades e projetos ficam 
 | `whoami` | Sobre mim |
 | `skills` | Tecnologias |
 | `projects` | Projetos |
+| `experience` | Experiência profissional |
 | `contact` | Contato |
 | `help` | Lista os comandos |
 
@@ -83,6 +84,7 @@ src/
     content.ts            # textos PT/EN (sobre, contato, help)
     skills.ts             # categorias e níveis de habilidade
     projects.ts           # projetos exibidos no comando projects
+    experience.ts         # experiências profissionais
   components/
     terminal/             # chrome, prompt, banner ASCII, modais
     sections/             # about, skills, projects, contact
@@ -101,6 +103,7 @@ public/projects/          # capas dos projetos (PNG, SVG, WebP…)
 | Textos, cargo, contato | `src/data/content.ts` |
 | Tecnologias e níveis | `src/data/skills.ts` |
 | Projetos | `src/data/projects.ts` |
+| Experiência | `src/data/experience.ts` |
 | Capas | `public/projects/` — no projeto, use `image: '/projects/arquivo.png'` |
 
 Níveis de habilidade: `familiar` (básico), `working` (intermediário), `strong` (avançado).
