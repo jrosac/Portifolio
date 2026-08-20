@@ -109,19 +109,3 @@ public/projects/          # capas dos projetos (PNG, SVG, WebP…)
 | Capas | `public/projects/` — no projeto, use `image: '/projects/arquivo.png'` |
 
 Níveis de habilidade: `familiar` (básico), `working` (intermediário), `strong` (avançado).
-
----
-
-## Projetos no portfólio
-
-- **Portfólio Terminal** — este site
-- **[FinControl](https://github.com/jrosac/Fincontrol)** — gestão financeira em Laravel
-- **[Cripto Analyze](https://github.com/jrosac/Cripto-analyze)** — cotações de criptomoedas em React + TypeScript
-
----
-
-## Contato
-
-- E-mail: [jrosacontacts@gmail.com](mailto:jrosacontacts@gmail.com)
-- GitHub: [github.com/jrosac](https://github.com/jrosac)
-- LinkedIn: [linkedin.com/in/joaorosaconceicao](https://www.linkedin.com/in/joaorosaconceicao/)
