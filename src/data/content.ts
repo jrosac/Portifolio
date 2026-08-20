@@ -40,7 +40,7 @@ export const content = {
       name: 'João Rosa Conceição',
       role: 'Desenvolvedor Full Stack',
       tagline:
-        'Meu portfólio interativo. Navegue por comandos para conhecer quem sou, as tecnologias que uso e os projetos que desenvolvi.',
+        'Meu portfólio interativo. Navegue por comandos para conhecer quem sou, as tecnologias que uso e os projetos que desenvolvi. :)',
       available: 'Disponível para novos desafios.',
     },
     about: {
@@ -72,11 +72,11 @@ export const content = {
     skills: {
       command: 'skills',
       intro: 'HABILIDADES TÉCNICAS',
-      legend: 'nível',
+      legend: 'experiência',
       levels: {
-        familiar: 'básico',
-        working: 'intermediário',
-        strong: 'avançado',
+        familiar: 'até 1 ano',
+        working: 'entre 1 e 2 anos',
+        strong: 'mais de 2 anos',
       },
     },
     projects: {
@@ -236,11 +236,11 @@ export const content = {
     skills: {
       command: 'skills',
       intro: 'HARD SKILLS',
-      legend: 'level',
+      legend: 'experience',
       levels: {
-        familiar: 'familiar',
-        working: 'working',
-        strong: 'strong',
+        familiar: 'up to 1 year',
+        working: '1 to 2 years',
+        strong: 'over 2 years',
       },
     },
     projects: {
