@@ -15,6 +15,7 @@ import { About } from './components/sections/About'
 import { Skills } from './components/sections/Skills'
 import { Projects } from './components/sections/Projects'
 import { ProjectModal } from './components/sections/ProjectModal'
+import { Experience } from './components/sections/Experience'
 import { Contact } from './components/sections/Contact'
 import { Footer } from './components/sections/Footer'
 
@@ -25,6 +26,7 @@ const PANEL_META: Record<PanelId, { command: string; labelledBy: string }> = {
   about: { command: 'about', labelledBy: 'about-title' },
   skills: { command: 'skills', labelledBy: 'skills-title' },
   projects: { command: 'projects', labelledBy: 'projects-title' },
+  experience: { command: 'experience', labelledBy: 'experience-title' },
   contact: { command: 'contact', labelledBy: 'contact-title' },
   exit: { command: 'exit', labelledBy: 'exit-title' },
 }
@@ -111,6 +113,7 @@ function Portfolio() {
         {panel === 'projects' ? (
           <Projects onOpen={setProjectId} />
         ) : null}
+        {panel === 'experience' ? <Experience /> : null}
         {panel === 'contact' ? <Contact /> : null}
         {panel === 'exit' ? <Footer /> : null}
       </CommandModal>
