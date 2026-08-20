@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext'
-import { ThemeProvider } from './theme/ThemeContext'
 import { MotionConfig } from 'framer-motion'
 import { useTerminal, type PanelId } from './hooks/useTerminal'
 import { TerminalChrome } from './components/terminal/TerminalChrome'
@@ -126,12 +125,10 @@ function Portfolio() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <MotionConfig reducedMotion="user">
-          <Portfolio />
-        </MotionConfig>
-      </LanguageProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <MotionConfig reducedMotion="user">
+        <Portfolio />
+      </MotionConfig>
+    </LanguageProvider>
   )
 }

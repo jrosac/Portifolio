@@ -65,7 +65,7 @@ export function IdentityBanner() {
         </motion.p>
       </div>
 
-      <motion.p variants={fade} className="mt-16 text-sm text-muted sm:mt-20">
+      <motion.p variants={fade} className="mt-6 text-sm text-muted">
         {lang === 'pt' ? 'digite ' : 'type '}
         <span className="text-command">help</span>
         {lang === 'pt' ? ' para explorar' : ' to explore'}
