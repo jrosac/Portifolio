@@ -6,6 +6,7 @@ export type PanelId =
   | 'about'
   | 'skills'
   | 'projects'
+  | 'experience'
   | 'contact'
   | 'exit'
 
@@ -18,6 +19,7 @@ const PANELS = new Set<PanelId>([
   'about',
   'skills',
   'projects',
+  'experience',
   'contact',
 ])
 

@@ -92,6 +92,10 @@ export const content = {
       github: 'GITHUB',
       noLive: 'sem demo online',
     },
+    experience: {
+      command: 'experience',
+      intro: 'EXPERIÊNCIA PROFISSIONAL',
+    },
     contact: {
       command: 'contact',
       headline: 'VAMOS CONSTRUIR ALGO.',
@@ -139,6 +143,7 @@ export const content = {
             { cmd: 'whoami', hint: 'sobre mim' },
             { cmd: 'skills', hint: 'tecnologias' },
             { cmd: 'projects', hint: 'meus projetos' },
+            { cmd: 'experience', hint: 'experiência profissional' },
             { cmd: 'contact', hint: 'contato' },
           ],
         },
@@ -251,6 +256,10 @@ export const content = {
       github: 'GITHUB',
       noLive: 'no live demo',
     },
+    experience: {
+      command: 'experience',
+      intro: 'PROFESSIONAL EXPERIENCE',
+    },
     contact: {
       command: 'contact',
       headline: "LET'S BUILD SOMETHING.",
@@ -298,6 +307,7 @@ export const content = {
             { cmd: 'whoami', hint: 'about me' },
             { cmd: 'skills', hint: 'technologies' },
             { cmd: 'projects', hint: 'my projects' },
+            { cmd: 'experience', hint: 'professional experience' },
             { cmd: 'contact', hint: 'contact me' },
           ],
         },
