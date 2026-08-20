@@ -57,9 +57,9 @@ export const content = {
       hobbiesLabel: 'Interesses',
       hobbies: [
         'Música e playlists longas',
-        'Jogos e sistemas de progressão',
-        'Cinema e séries',
-        'Explorar ferramentas novas',
+        'Livros e boas histórias',
+        'Filmes, séries, animações e documentários',
+        'Explorar novas tecnologias',
       ],
     },
     softSkills: [
@@ -222,7 +222,7 @@ export const content = {
       hobbies: [
         'Music and long playlists',
         'Games and progression systems',
-        'Film and series',
+        'Film, series, animations and documentaries',
         'Exploring new tools',
       ],
     },
