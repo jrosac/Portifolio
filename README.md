@@ -106,4 +106,4 @@ public/projects/          # capas dos projetos (PNG, SVG, WebP…)
 | Experiência | `src/data/experience.ts` |
 | Capas | `public/projects/` — no projeto, use `image: '/projects/arquivo.png'` |
 
-Níveis de habilidade: `familiar` (básico), `working` (intermediário), `strong` (avançado).
+Níveis de habilidade: `familiar` (até 1 ano), `working` (entre 1 e 2 anos), `strong` (mais de 2 anos).
