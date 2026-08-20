@@ -116,12 +116,6 @@ export const content = {
       notFound: 'comando não encontrado: {cmd} — digite help',
       langUsage: 'uso: lang pt | lang en',
       langSet: 'Idioma: Português',
-      themeUsage: 'uso: theme | theme github | theme midnight',
-      themeSet: 'Tema: {theme}',
-      themeNames: {
-        github: 'GitHub Dark',
-        midnight: 'Midnight',
-      },
       guide: {
         title: 'Bem-vindo',
         welcome: 'Bem-vindo ao meu portfólio.',
@@ -153,7 +147,6 @@ export const content = {
           items: [
             { cmd: 'clear', hint: 'limpar terminal' },
             { cmd: 'lang', hint: 'trocar idioma' },
-            { cmd: 'theme', hint: 'trocar tema' },
             { cmd: 'help', hint: 'mostrar comandos' },
           ],
         },
@@ -282,12 +275,6 @@ export const content = {
       notFound: 'command not found: {cmd} — type help',
       langUsage: 'usage: lang pt | lang en',
       langSet: 'Language: English',
-      themeUsage: 'usage: theme | theme github | theme midnight',
-      themeSet: 'Theme: {theme}',
-      themeNames: {
-        github: 'GitHub Dark',
-        midnight: 'Midnight',
-      },
       guide: {
         title: 'Welcome',
         welcome: 'Welcome to my portfolio.',
@@ -319,7 +306,6 @@ export const content = {
           items: [
             { cmd: 'clear', hint: 'clear terminal' },
             { cmd: 'lang', hint: 'change language' },
-            { cmd: 'theme', hint: 'change theme' },
             { cmd: 'help', hint: 'show available commands' },
           ],
         },

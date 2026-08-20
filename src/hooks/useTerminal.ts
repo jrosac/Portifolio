@@ -1,6 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
-import { isThemeId, useTheme } from '../theme/ThemeContext'
 
 export type PanelId =
   | 'whoami'
@@ -24,7 +23,6 @@ const PANELS = new Set<PanelId>([
 
 export function useTerminal() {
   const { setLang, t } = useLanguage()
-  const { setTheme, cycleTheme } = useTheme()
   const nextId = useRef(1)
   const [history, setHistory] = useState<HistoryItem[]>([
     { id: 0, kind: 'home' },
@@ -100,35 +98,11 @@ export function useTerminal() {
           echo(input, t.commands.langUsage)
           return
         }
-        case 'theme': {
-          const next = args[0]
-          if (!next) {
-            const applied = cycleTheme()
-            echo(
-              input,
-              t.commands.themeSet.replace(
-                '{theme}',
-                t.commands.themeNames[applied],
-              ),
-            )
-            return
-          }
-          if (isThemeId(next)) {
-            setTheme(next)
-            echo(
-              input,
-              t.commands.themeSet.replace('{theme}', t.commands.themeNames[next]),
-            )
-            return
-          }
-          echo(input, t.commands.themeUsage, true)
-          return
-        }
         default:
           echo(input, t.commands.notFound.replace('{cmd}', cmd), true)
       }
     },
-    [append, cycleTheme, echo, openPanel, setLang, setTheme, t],
+    [append, echo, openPanel, setLang, t],
   )
 
   return { history, panel, setPanel, projectId, setProjectId, run }
