@@ -7,6 +7,12 @@ type ProjectModalProps = {
   onClose: () => void
 }
 
+const actionClass =
+  'inline-flex min-w-[10.5rem] items-center justify-center rounded border border-accent/40 bg-accent/10 px-3 py-2 text-center text-sm text-accent transition-colors hover:bg-accent/15'
+
+const disabledClass =
+  'inline-flex min-w-[10.5rem] items-center justify-center rounded border border-border px-3 py-2 text-center text-sm text-muted'
+
 export function ProjectModal({ projectId, onClose }: ProjectModalProps) {
   const { lang, t } = useLanguage()
   const project = projects.find((item) => item.id === projectId) ?? null
@@ -63,28 +69,24 @@ export function ProjectModal({ projectId, onClose }: ProjectModalProps) {
                 href={project.liveUrl ?? undefined}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border border-accent/40 bg-accent/10 px-3 py-2 text-sm text-accent hover:bg-accent/15"
+                className={actionClass}
               >
                 [ {t.projects.live} ]
               </a>
             ) : (
-              <span className="rounded border border-border px-3 py-2 text-sm text-muted">
-                [ {t.projects.noLive} ]
-              </span>
+              <span className={disabledClass}>[ {t.projects.noLive} ]</span>
             )}
             {project.githubUrl && project.githubUrl !== '#' ? (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border border-border px-3 py-2 text-sm text-fg hover:border-accent/40 hover:text-accent"
+                className={actionClass}
               >
                 [ {t.projects.github} ]
               </a>
             ) : (
-              <span className="rounded border border-border px-3 py-2 text-sm text-muted">
-                [ {t.projects.github} ]
-              </span>
+              <span className={disabledClass}>[ {t.projects.github} ]</span>
             )}
           </div>
         </>

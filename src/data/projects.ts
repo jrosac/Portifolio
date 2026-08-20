@@ -18,8 +18,8 @@ export const projects: Project[] = [
     id: '01',
     featured: true,
     image: '/projects/portifolio.png',
-    liveUrl: '/',
-    githubUrl: '#',
+    liveUrl: 'https://portifolio-opal.vercel.app/',
+    githubUrl: 'https://github.com/jrosac/Portifolio',
     technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Framer Motion'],
     name: {
       pt: 'Portfólio Terminal',

@@ -254,7 +254,7 @@ export const content = {
       description: 'DESCRIPTION',
       technologies: 'TECHNOLOGIES',
       features: 'FEATURES',
-      live: 'VIEW LIVE',
+      live: 'VIEW SITE',
       github: 'GITHUB',
       noLive: 'no live demo',
     },
