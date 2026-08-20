@@ -6,8 +6,6 @@ Portfólio pessoal em formato de **terminal interativo**. Em vez de uma página 
 
 **João Rosa Conceição** · Desenvolvedor Full Stack
 
-> Eu construo software para durar — simples de usar, sólido por baixo.
-
 ---
 
 ## Tecnologias
