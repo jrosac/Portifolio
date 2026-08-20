@@ -29,7 +29,6 @@ O site é estático (não tem backend). Conteúdo, habilidades e projetos ficam 
 - Prompt `joao@portfolio:~$` com histórico de comandos
 - Janelas (modais) para sobre, tecnologias, projetos e contato
 - Interface em **português** e **inglês** (`lang pt` / `lang en`, ou PT/EN no topo)
-- Dois temas escuros: GitHub Dark e Midnight (`theme`)
 - Projetos com capa, descrição, stack e link para o GitHub
 - Layout pensado para desktop e mobile
 
@@ -51,7 +50,6 @@ O site é estático (não tem backend). Conteúdo, habilidades e projetos ficam 
 | --- | --- |
 | `clear` | Limpa o histórico e volta à home |
 | `lang pt` / `lang en` | Troca o idioma |
-| `theme` | Alterna o tema (`theme github` ou `theme midnight`) |
 | `exit` | Encerrar (mensagem de saída) |
 
 Também dá para clicar nos comandos depois de digitar `help`.
@@ -91,7 +89,6 @@ src/
     nav/                  # home, help e input de comando
   hooks/useTerminal.ts    # parser e histórico de comandos
   i18n/                   # idioma (localStorage: portfolio-lang)
-  theme/                  # tema (localStorage: portfolio-theme)
 public/projects/          # capas dos projetos (PNG, SVG, WebP…)
 ```
 
