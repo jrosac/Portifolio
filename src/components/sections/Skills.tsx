@@ -25,7 +25,7 @@ export function Skills() {
       </h2>
       <div>
         <p className="text-sm tracking-wide text-muted">{t.skills.intro}</p>
-        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted">
+        <p className="mt-2 flex flex-col gap-y-1.5 text-xs text-muted sm:flex-row sm:flex-wrap sm:gap-x-4">
           <span>{t.skills.legend}:</span>
           <span className="inline-flex items-center gap-2">
             <LevelDots level="familiar" /> {t.skills.levels.familiar}

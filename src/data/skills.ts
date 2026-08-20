@@ -21,7 +21,8 @@ export const skillCategories: SkillCategory[] = [
       { name: 'PHP', level: 'strong' },
       { name: 'Laravel', level: 'strong' },
       { name: 'Node', level: 'strong' },
-      { name: 'APIs REST', level: 'strong' },
+      { name: 'Java', level: 'working' },
+      { name: 'APIs REST', level: 'working' },
       { name: 'MVC', level: 'strong' },
     ],
   },
@@ -56,7 +57,7 @@ export const skillCategories: SkillCategory[] = [
     items: [
       { name: 'Git', level: 'strong' },
       { name: 'GitHub', level: 'strong' },
-      { name: 'GitLab', level: 'strong' },
+      { name: 'GitLab', level: 'working' },
       { name: 'Firebase', level: 'working' },
       { name: 'Supabase', level: 'working' },
     ],
